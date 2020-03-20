@@ -4,7 +4,7 @@ const crypto = require('crypto');
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
 
-    var hmac = crypto.createHmac("sha1", "dTN8xFrUlcqW8Uok8e792S7RfVkTBN5fmuH9ECLsrFTP7hKiccaBSQ==");
+    var hmac = crypto.createHmac("sha1", process.env.Secret);
     var signature = hmac.update(JSON.stringify(req.body)).digest("hex");
     var shaSignature = `sha1=${signature}`;
     var gitHubSignature = req.headers['x-hub-signature'];
